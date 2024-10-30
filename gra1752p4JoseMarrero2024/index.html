@@ -3,55 +3,78 @@
 <head>
 <meta charset="utf-8">
 <title>Rise and Shine</title>
-	<style>
-		div {
-			width: 500px;
-			height: 300px;	
-			margin-left:auto;
-			margin-right:auto;
-		}
-		img {
-		width: 500px;
-		height: 300px;
-		}
-		svg {
-			position: absolute;
-		}
-		#egg {
-			transform: translate(160px) ;
-			transition: 0.5s ease-in-out;
-			animation-name: egg;
-			animation-duration: 1s;
-			animation-iteration-count: infinite;
-			animation-direction: alternate;
-		}
-		#egg:hover {
-			transition: 0.5s ease-in-out;
-			animation-name: egg, egg-hover;
-			animation-duration: 1s, 1s;
-			animation-play-state: running, paused;
-		}
-		#egg:active {
-			 
-		}
-
-		@keyframes egg {
-			0% {transform: translate(260px) rotate(30deg);}
-			50% {transform: translate(80px) rotate(-20deg);}
-			100% {transform: translate(160px);}
-		}
-		@keyframes egg-hover {
-			0% {transform: translate(160px);}
-		}
-	</style>
+<style>
+div {
+	width: 500px;
+	height: 300px;
+	margin-left: auto;
+	margin-right: auto;
+}
+img {
+	width: 500px;
+	height: 300px;
+}
+svg {
+	position: absolute;
+}
+#egg {
+	transform: translate(160px);
+	transition: 0.5s ease-in-out;
+	animation-name: egg;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+#egg:hover {
+	transition: 0.5s ease-in-out;
+	animation-name: egg, egg-hover;
+	animation-duration: 1s, 1s;
+	animation-play-state: running, paused;
+}
+#egg:active {
+}
+@keyframes egg {
+0% {
+transform: translate(260px) rotate(30deg);
+}
+50% {
+transform: translate(80px) rotate(-20deg);
+}
+100% {
+transform: translate(160px);
+}
+}
+@keyframes egg-hover {
+0% {
+transform: translate(160px);
+}
+}
+footer {
+	text-align: center;
+	padding: 50px, 0px;
+	margin-top: auto;
+	border-radius: 0px;
+	border: solid black;
+	width: 100%;
+	height: 200px;
+	background-color: #d9d9d9;
+	align-content: center;
+}
+footer p {
+	text-align: center;
+}
+}
+</style>
 </head>
 
 <body>
-	<div>
+<div>
   <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" width="500px" height="300px" viewBox="0 0 390.54 215.07">
-  <path id="egg" d="M57.83,152.51c3.23,8.18,9.8,24.83,1.72,41.25-1.14,2.32-10.61,20.86-27.43,20.8-15.61-.05-24.82-16.07-26.38-18.77-10.2-17.75-2.76-37.15-.41-43.28,1.61-4.19,11.41-29.74,26.79-29.46,14.18.26,22.88,22.28,25.71,29.45Z" fill="#fff" stroke="#000" stroke-miterlimit="10"/>
-</svg>
-		<img src="images/background-image-01.png" alt="background">
-	</div>
+    <path id="egg" d="M57.83,152.51c3.23,8.18,9.8,24.83,1.72,41.25-1.14,2.32-10.61,20.86-27.43,20.8-15.61-.05-24.82-16.07-26.38-18.77-10.2-17.75-2.76-37.15-.41-43.28,1.61-4.19,11.41-29.74,26.79-29.46,14.18.26,22.88,22.28,25.71,29.45Z" fill="#fff" stroke="#000" stroke-miterlimit="10"/>
+  </svg>
+  <img src="images/background-image-01.png" alt="background"> </div>
+<footer>
+  <p>©2024, Jose C Marrero. This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+</footer>
 </body>
 </html>
