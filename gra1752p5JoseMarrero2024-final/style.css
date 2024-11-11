@@ -1,0 +1,77 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+nav {
+  width: 100%;
+  height: 230px;
+  display: flex;
+	flex-direction: column;
+  background-color: black;
+}
+main {
+	background-color: #D9D9D9;
+}
+section {
+	width: 800px;
+	height: 800px;
+    margin-left: auto;
+	margin-right: auto;
+	padding: 30px;
+	background-color: #FFF;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+#image {
+	margin-top: 100px;
+	transform: translate(0px);
+	transition: 0.5s ease-in-out;
+	animation-name: car;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+#image:hover {
+	transition: 0.5s ease-in-out;
+	animation-name: car, car-active;
+	animation-duration: 1s, 1s;
+	animation-play-state: paused, paused;
+}
+@keyframes car {
+0% {
+transform: translate(0px);
+}
+50% {
+transform: translate(100px);
+}
+100% {
+transform: translate(-100px);
+}
+}
+@keyframes car-active {
+0% {
+transform: translate(0px);
+}
+}
+footer {
+  text-align: center;
+  padding: 50px, 0px;
+  margin-top: auto;
+  border-radius: 0px;
+  border: solid black;
+  width: 100%;
+  height: 200px;
+  background-color: #000;
+  align-content: center;
+}
+footer p {
+	text-align: center;
+	color: #fff;
+}
