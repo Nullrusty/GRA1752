@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<!-- Created with Ai->Canvas Export Plug-In Version 1.8 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)             -->
+
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <title>gra1752p6JoseMarrero2024-final</title>
+  <script src="Ai2CanvasAnimation.js"></script>
+  <script>
+
+    // Main canvas and context references
+    var canvas;
+    var ctx;
+
+    // Frames per second
+    var fps = 60.0;
+
+    // Animations
+    var animations = [ new blueorbPath(), new yelloworbPath(), new redorbPath() ];
+
+    function blueorbPath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [250.0, 250.0], [291.3, 339.7], [381.0, 401.1], [389.9, 392.6] ],
+                    [ [389.9, 392.6], [400.3, 382.7], [328.8, 250.2], [250.0, 250.0] ],
+                    [ [250.0, 250.0], [171.2, 249.8], [100.1, 382.0], [111.2, 393.1] ],
+                    [ [111.2, 393.1], [118.5, 400.4], [170.9, 363.9], [205.4, 323.7] ],
+                    [ [205.4, 323.7], [229.0, 296.2], [242.4, 269.0], [250.0, 250.0] ],
+                    [ [250.0, 250.0], [259.3, 226.7], [274.9, 191.9], [275.3, 146.2] ],
+                    [ [275.3, 146.2], [275.6, 100.7], [261.6, 49.8], [250.0, 50.0] ],
+                    [ [250.0, 50.0], [238.3, 50.2], [227.3, 102.7], [227.6, 146.2] ],
+                    [ [227.6, 146.2], [228.0, 199.0], [244.8, 238.7], [250.0, 250.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.17, 0.04], [0, 0.35, 0.08], [0, 0.56, 0.12], 
+                    [0, 0.91, 0.16], [1, 0.34, 0.20], [1, 0.54, 0.24], [1, 0.73, 0.28], 
+                    [1, 0.93, 0.32], [2, 0.14, 0.36], [2, 0.34, 0.40], [2, 0.53, 0.44], 
+                    [2, 0.75, 0.48], [3, 0.34, 0.52], [3, 0.71, 0.56], [4, 0.03, 0.60], 
+                    [4, 0.55, 0.64], [5, 0.20, 0.68], [5, 0.68, 0.72], [6, 0.07, 0.76], 
+                    [6, 0.45, 0.80], [7, 0.17, 0.84], [7, 0.67, 0.88], [8, 0.04, 0.92], 
+                    [8, 0.40, 0.96], [8, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [0.16, 0.33, 0.50, 0.60, 0.67, 0.75, 0.83, 0.91, 1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(3.00, 2.00, 1, false, 0, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function yelloworbPath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [250.0, 250.0], [291.3, 339.7], [381.0, 401.1], [389.9, 392.6] ],
+                    [ [389.9, 392.6], [400.3, 382.7], [328.8, 250.2], [250.0, 250.0] ],
+                    [ [250.0, 250.0], [171.2, 249.8], [100.1, 382.0], [111.2, 393.1] ],
+                    [ [111.2, 393.1], [118.5, 400.4], [170.9, 363.9], [205.4, 323.7] ],
+                    [ [205.4, 323.7], [229.0, 296.2], [242.4, 269.0], [250.0, 250.0] ],
+                    [ [250.0, 250.0], [259.3, 226.7], [274.9, 191.9], [275.3, 146.2] ],
+                    [ [275.3, 146.2], [275.6, 100.7], [261.6, 49.8], [250.0, 50.0] ],
+                    [ [250.0, 50.0], [238.3, 50.2], [227.3, 102.7], [227.6, 146.2] ],
+                    [ [227.6, 146.2], [228.0, 199.0], [244.8, 238.7], [250.0, 250.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.17, 0.04], [0, 0.35, 0.08], [0, 0.56, 0.12], 
+                    [0, 0.91, 0.16], [1, 0.34, 0.20], [1, 0.54, 0.24], [1, 0.73, 0.28], 
+                    [1, 0.93, 0.32], [2, 0.14, 0.36], [2, 0.34, 0.40], [2, 0.53, 0.44], 
+                    [2, 0.75, 0.48], [3, 0.34, 0.52], [3, 0.71, 0.56], [4, 0.03, 0.60], 
+                    [4, 0.55, 0.64], [5, 0.20, 0.68], [5, 0.68, 0.72], [6, 0.07, 0.76], 
+                    [6, 0.45, 0.80], [7, 0.17, 0.84], [7, 0.67, 0.88], [8, 0.04, 0.92], 
+                    [8, 0.40, 0.96], [8, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [0.16, 0.33, 0.50, 0.60, 0.67, 0.75, 0.83, 0.91, 1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(3.00, 1.00, 1, false, 0, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function redorbPath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [250.0, 250.0], [291.3, 339.7], [381.0, 401.1], [389.9, 392.6] ],
+                    [ [389.9, 392.6], [400.3, 382.7], [328.8, 250.2], [250.0, 250.0] ],
+                    [ [250.0, 250.0], [171.2, 249.8], [100.1, 382.0], [111.2, 393.1] ],
+                    [ [111.2, 393.1], [118.5, 400.4], [170.9, 363.9], [205.4, 323.7] ],
+                    [ [205.4, 323.7], [229.0, 296.2], [242.4, 269.0], [250.0, 250.0] ],
+                    [ [250.0, 250.0], [259.3, 226.7], [274.9, 191.9], [275.3, 146.2] ],
+                    [ [275.3, 146.2], [275.6, 100.7], [261.6, 49.8], [250.0, 50.0] ],
+                    [ [250.0, 50.0], [238.3, 50.2], [227.3, 102.7], [227.6, 146.2] ],
+                    [ [227.6, 146.2], [228.0, 199.0], [244.8, 238.7], [250.0, 250.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.17, 0.04], [0, 0.35, 0.08], [0, 0.56, 0.12], 
+                    [0, 0.91, 0.16], [1, 0.34, 0.20], [1, 0.54, 0.24], [1, 0.73, 0.28], 
+                    [1, 0.93, 0.32], [2, 0.14, 0.36], [2, 0.34, 0.40], [2, 0.53, 0.44], 
+                    [2, 0.75, 0.48], [3, 0.34, 0.52], [3, 0.71, 0.56], [4, 0.03, 0.60], 
+                    [4, 0.55, 0.64], [5, 0.20, 0.68], [5, 0.68, 0.72], [6, 0.07, 0.76], 
+                    [6, 0.45, 0.80], [7, 0.17, 0.84], [7, 0.67, 0.88], [8, 0.04, 0.92], 
+                    [8, 0.40, 0.96], [8, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [0.16, 0.33, 0.50, 0.60, 0.67, 0.75, 0.83, 0.91, 1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(3.00, 0.00, 1, false, 0, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function init() {
+
+      // Set main canvas and context references
+      canvas = document.getElementById("canvas");
+      ctx = canvas.getContext("2d");
+
+      // Start animation clocks
+      animations[0].pathClock.start();
+      animations[1].pathClock.start();
+      animations[2].pathClock.start();
+
+      // Set animation timer
+      setInterval(drawFrame, (1000 / fps));
+    }
+
+    function updateAnimations() {
+
+      // Update animation paths  
+      var animationCount = animations.length;
+      for (var i = 0; i < animationCount; i++) {
+        animations[i].update();
+      }
+    }
+
+    function drawFrame() {
+
+      // Update animations
+      updateAnimations();
+
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      frame(ctx);
+
+      ctx.save();
+      ctx.translate(animations[0].x, animations[0].y);
+      blueorb(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[1].x, animations[1].y);
+      yelloworb(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[2].x, animations[2].y);
+      redorb(ctx);
+      ctx.restore();
+    }
+
+    function frame(ctx) {
+
+      // frame/frame
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(500.0, 500.0);
+      ctx.lineTo(0.0, 500.0);
+      ctx.lineTo(0.0, 0.0);
+      ctx.lineTo(500.0, 0.0);
+      ctx.lineTo(500.0, 500.0);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 255)";
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function blueorb(ctx) {
+
+      // blueorb/blueorb
+      ctx.save();
+      ctx.drawImage(document.getElementById("image1"), -50.0, -50.5);
+      ctx.restore();
+    }
+
+    function yelloworb(ctx) {
+
+      // yelloworb/yelloworb
+      ctx.save();
+      ctx.drawImage(document.getElementById("image2"), -50.0, -50.5);
+      ctx.restore();
+    }
+
+    function redorb(ctx) {
+
+      // redorb/redorb
+      ctx.save();
+      ctx.drawImage(document.getElementById("image3"), -50.0, -50.5);
+      ctx.restore();
+    }
+  </script>
+ <link href="styles.css" rel="stylesheet" type="text/css">
+ </head>
+ <body onload="init()">
+   <canvas id="canvas" width="500" height="500"></canvas>
+   <img alt="blueorb" id="image1" style="display: none" src="image1.png" />
+   <img alt="yelloworb" id="image2" style="display: none" src="image2.png" />
+   <img alt="redorb" id="image3" style="display: none" src="image3.png" />
+	<footer>
+		<p id="footer_text">©2024, Jose C Marrero. This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+	</footer>
+ </body>
+</html>
