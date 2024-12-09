@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<!-- Created with Ai->Canvas Export Plug-In Version 1.8 (PC/64) -->
+<!-- By Mike Swanson (http://blog.mikeswanson.com/)             -->
+
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <title>gra1752p7JoseMarrero2024-final</title>
+  <script src="Ai2CanvasAnimation.js"></script>
+  <script>
+
+    // Main canvas and context references
+    var canvas;
+    var ctx;
+
+    // Frames per second
+    var fps = 60.0;
+
+    // Animations
+    var animations = [ new largebubblePath(), new bubblePath(), new bubble2Path(), new smallbubblePath(), new tinybubblePath() ];
+
+    function largebubblePath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [56.7, 0.0], [67.3, 33.9], [55.0, 86.5], [55.0, 86.5] ],
+                    [ [55.0, 86.5], [55.0, 86.5], [36.4, 154.6], [40.9, 181.8] ],
+                    [ [40.9, 181.8], [45.4, 208.9], [56.0, 271.3], [53.2, 279.5] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.50, 0.20], [1, 0.39, 0.40], [1, 0.85, 0.60], 
+                    [2, 0.38, 0.80], [2, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [0.31, 0.65, 1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(5.00, 0.00, -1, false, 0, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function bubblePath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [41.2, 12.0], [41.2, 12.0], [56.3, 43.8], [53.2, 70.6] ],
+                    [ [53.2, 70.6], [50.0, 97.4], [35.2, 127.8], [43.3, 145.8] ],
+                    [ [43.3, 145.8], [51.4, 163.8], [52.5, 198.8], [50.0, 206.9] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [1, 0.07, 0.33], [1, 0.93, 0.67], [2, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [0.30, 0.69, 1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(3.00, 0.00, -1, false, 0, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function bubble2Path() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [73.0, 42.0], [73.0, 42.0], [84.0, 62.5], [82.4, 77.6] ],
+                    [ [82.4, 77.6], [80.7, 92.8], [80.1, 142.6], [85.5, 147.9] ],
+                    [ [85.5, 147.9], [91.0, 153.2], [83.0, 168.0], [82.4, 174.0] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.79, 0.20], [1, 0.25, 0.40], [1, 0.56, 0.60], 
+                    [2, 0.01, 0.80], [2, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [0.28, 0.80, 1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(3.00, 0.00, -1, false, 0, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function smallbubblePath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [14.2, 35.3], [14.2, 35.3], [14.9, 43.7], [10.2, 58.9] ],
+                    [ [10.2, 58.9], [5.5, 74.1], [-0.3, 106.9], [0.0, 119.1] ],
+                    [ [0.0, 119.1], [0.3, 131.4], [9.2, 164.7], [7.1, 179.9] ],
+                    [ [7.1, 179.9], [5.0, 195.1], [8.7, 240.6], [12.6, 248.7] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.95, 0.10], [1, 0.32, 0.20], [1, 0.63, 0.30], 
+                    [2, 0.03, 0.40], [2, 0.40, 0.50], [2, 0.71, 0.60], [3, 0.09, 0.70], 
+                    [3, 0.37, 0.80], [3, 0.63, 0.90], [3, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [0.11, 0.39, 0.68, 1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 0.00, -1, false, 0, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function tinybubblePath() {
+
+      // Control and anchor points
+      this.points = [
+                    [ [94.7, 43.8], [94.7, 43.8], [88.5, 45.9], [89.1, 76.5] ],
+                    [ [89.1, 76.5], [89.6, 107.1], [94.7, 144.3], [94.7, 144.3] ],
+                    [ [94.7, 144.3], [94.7, 144.3], [96.5, 222.1], [90.8, 233.4] ]
+                    ];
+
+      // Linear motion index
+      this.linear = [
+                    [0, 0.00, 0.00], [0, 0.98, 0.17], [1, 0.32, 0.33], [1, 0.75, 0.50], 
+                    [2, 0.38, 0.67], [2, 0.64, 0.83], [2, 1.00, 1.00]
+                    ];
+
+      // Segment T boundaries
+      this.segmentT = [0.18, 0.53, 1.00];
+
+      this.lastValue = -1.0;
+      this.x = 0;
+      this.y = 0;
+      this.orientation = 0.0;
+      this.pathClock = new clock(2.00, 0.00, -1, false, 0, linear, this.linear.length - 1, 1.00, 0.0000);
+
+      // Update function
+      this.update = updatePath;
+    }
+
+    function init() {
+
+      // Set main canvas and context references
+      canvas = document.getElementById("canvas");
+      ctx = canvas.getContext("2d");
+
+      // Initialize animations
+      largebubble.scaleClock = new clock(50.00, 0.00, -1, false, 0, quintEaseIn, 1.0, 1.00, 0.0001);
+      bubble.scaleClock = new clock(30.00, 0.00, -1, false, 0, quintEaseIn, 1.0, 1.00, 0.0001);
+      bubble2.scaleClock = new clock(30.00, 0.00, -1, false, 0, quintEaseIn, 1.0, 1.00, 0.0001);
+      smallbubble.scaleClock = new clock(20.00, 0.00, -1, false, 0, quintEaseIn, 1.0, 1.00, 0.0001);
+      tinybubble.scaleClock = new clock(20.00, 0.00, -1, false, 0, quintEaseIn, 1.0, 1.00, 0.0001);
+
+      // Start animation clocks
+      animations[0].pathClock.start();
+      largebubble.scaleClock.start();
+      animations[1].pathClock.start();
+      bubble.scaleClock.start();
+      animations[2].pathClock.start();
+      bubble2.scaleClock.start();
+      animations[3].pathClock.start();
+      smallbubble.scaleClock.start();
+      animations[4].pathClock.start();
+      tinybubble.scaleClock.start();
+
+      // Set animation timer
+      setInterval(drawFrame, (1000 / fps));
+    }
+
+    function updateAnimations() {
+
+      // Update animation clocks
+      updateAllClocks();
+
+      // Update animation paths  
+      var animationCount = animations.length;
+      for (var i = 0; i < animationCount; i++) {
+        animations[i].update();
+      }
+    }
+
+    function drawFrame() {
+
+      // Update animations
+      updateAnimations();
+
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.save();
+      ctx.translate(animations[0].x, animations[0].y);
+      ctx.scale(largebubble.scaleClock.value, largebubble.scaleClock.value);
+      largebubble(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[1].x, animations[1].y);
+      ctx.scale(bubble.scaleClock.value, bubble.scaleClock.value);
+      bubble(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[2].x, animations[2].y);
+      ctx.scale(bubble2.scaleClock.value, bubble2.scaleClock.value);
+      bubble2(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[3].x, animations[3].y);
+      ctx.scale(smallbubble.scaleClock.value, smallbubble.scaleClock.value);
+      smallbubble(ctx);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(animations[4].x, animations[4].y);
+      ctx.scale(tinybubble.scaleClock.value, tinybubble.scaleClock.value);
+      tinybubble(ctx);
+      ctx.restore();
+    }
+
+    function largebubble(ctx) {
+
+      var alpha = ctx.globalAlpha;
+
+      // largebubble/largebubble
+      ctx.save();
+
+      // largebubble/largebubble/Ellipse
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.25;
+      ctx.beginPath();
+      ctx.moveTo(35.0, 0.0);
+      ctx.bezierCurveTo(35.0, 19.3, 19.3, 35.0, -0.0, 35.0);
+      ctx.bezierCurveTo(-19.3, 35.0, -35.0, 19.3, -35.0, 0.0);
+      ctx.bezierCurveTo(-35.0, -19.3, -19.3, -35.0, -0.0, -35.0);
+      ctx.bezierCurveTo(19.3, -35.0, 35.0, -19.3, 35.0, 0.0);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(0, 230, 255)";
+      ctx.fill();
+      ctx.lineWidth = 2.0;
+      ctx.strokeStyle = "rgb(255, 255, 255)";
+      ctx.stroke();
+
+      // largebubble/largebubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(24.5, -12.4);
+      ctx.bezierCurveTo(24.5, -8.3, 20.4, -5.0, 15.4, -5.0);
+      ctx.bezierCurveTo(10.4, -5.0, 6.3, -8.3, 6.3, -12.4);
+      ctx.bezierCurveTo(6.3, -16.5, 10.4, -19.8, 15.4, -19.8);
+      ctx.bezierCurveTo(20.4, -19.8, 24.5, -16.5, 24.5, -12.4);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 255)";
+      ctx.fill();
+
+      // largebubble/largebubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(13.3, 8.9);
+      ctx.bezierCurveTo(13.3, 10.8, 11.7, 12.4, 9.8, 12.4);
+      ctx.bezierCurveTo(7.9, 12.4, 6.3, 10.8, 6.3, 8.9);
+      ctx.bezierCurveTo(6.3, 6.9, 7.9, 5.4, 9.8, 5.4);
+      ctx.bezierCurveTo(11.7, 5.4, 13.3, 6.9, 13.3, 8.9);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function bubble(ctx) {
+
+      var alpha = ctx.globalAlpha;
+
+      // bubble/Bubble
+      ctx.save();
+
+      // bubble/Bubble/Ellipse
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.25;
+      ctx.beginPath();
+      ctx.moveTo(17.6, 0.0);
+      ctx.bezierCurveTo(17.6, 9.7, 9.7, 17.6, 0.0, 17.6);
+      ctx.bezierCurveTo(-9.7, 17.6, -17.6, 9.7, -17.6, 0.0);
+      ctx.bezierCurveTo(-17.6, -9.7, -9.7, -17.6, 0.0, -17.6);
+      ctx.bezierCurveTo(9.7, -17.6, 17.6, -9.7, 17.6, 0.0);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(0, 230, 255)";
+      ctx.fill();
+      ctx.strokeStyle = "rgb(255, 255, 255)";
+      ctx.stroke();
+
+      // bubble/Bubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(12.4, -6.3);
+      ctx.bezierCurveTo(12.4, -4.2, 10.3, -2.5, 7.8, -2.5);
+      ctx.bezierCurveTo(5.2, -2.5, 3.2, -4.2, 3.2, -6.3);
+      ctx.bezierCurveTo(3.2, -8.3, 5.2, -10.0, 7.8, -10.0);
+      ctx.bezierCurveTo(10.3, -10.0, 12.4, -8.3, 12.4, -6.3);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 255)";
+      ctx.fill();
+
+      // bubble/Bubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(6.7, 4.5);
+      ctx.bezierCurveTo(6.7, 5.5, 5.9, 6.2, 4.9, 6.2);
+      ctx.bezierCurveTo(4.0, 6.2, 3.2, 5.5, 3.2, 4.5);
+      ctx.bezierCurveTo(3.2, 3.5, 4.0, 2.7, 4.9, 2.7);
+      ctx.bezierCurveTo(5.9, 2.7, 6.7, 3.5, 6.7, 4.5);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function bubble2(ctx) {
+
+      var alpha = ctx.globalAlpha;
+
+      // bubble2/Bubble
+      ctx.save();
+
+      // bubble2/Bubble/Ellipse
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.25;
+      ctx.beginPath();
+      ctx.moveTo(17.6, 0.0);
+      ctx.bezierCurveTo(17.6, 9.7, 9.7, 17.6, 0.0, 17.6);
+      ctx.bezierCurveTo(-9.7, 17.6, -17.6, 9.7, -17.6, 0.0);
+      ctx.bezierCurveTo(-17.6, -9.7, -9.7, -17.6, 0.0, -17.6);
+      ctx.bezierCurveTo(9.7, -17.6, 17.6, -9.7, 17.6, 0.0);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(0, 230, 255)";
+      ctx.fill();
+      ctx.strokeStyle = "rgb(255, 255, 255)";
+      ctx.stroke();
+
+      // bubble2/Bubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(12.4, -6.3);
+      ctx.bezierCurveTo(12.4, -4.2, 10.3, -2.5, 7.8, -2.5);
+      ctx.bezierCurveTo(5.2, -2.5, 3.2, -4.2, 3.2, -6.3);
+      ctx.bezierCurveTo(3.2, -8.3, 5.2, -10.0, 7.8, -10.0);
+      ctx.bezierCurveTo(10.3, -10.0, 12.4, -8.3, 12.4, -6.3);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 255)";
+      ctx.fill();
+
+      // bubble2/Bubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(6.7, 4.5);
+      ctx.bezierCurveTo(6.7, 5.5, 5.9, 6.2, 4.9, 6.2);
+      ctx.bezierCurveTo(4.0, 6.2, 3.2, 5.5, 3.2, 4.5);
+      ctx.bezierCurveTo(3.2, 3.5, 4.0, 2.7, 4.9, 2.7);
+      ctx.bezierCurveTo(5.9, 2.7, 6.7, 3.5, 6.7, 4.5);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function smallbubble(ctx) {
+
+      var alpha = ctx.globalAlpha;
+
+      // smallbubble/Bubble
+      ctx.save();
+
+      // smallbubble/Bubble/Ellipse
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.25;
+      ctx.beginPath();
+      ctx.moveTo(8.8, 0.0);
+      ctx.bezierCurveTo(8.8, 4.8, 4.8, 8.8, 0.0, 8.8);
+      ctx.bezierCurveTo(-4.8, 8.8, -8.8, 4.8, -8.8, 0.0);
+      ctx.bezierCurveTo(-8.8, -4.8, -4.8, -8.8, 0.0, -8.8);
+      ctx.bezierCurveTo(4.8, -8.8, 8.8, -4.8, 8.8, 0.0);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(0, 230, 255)";
+      ctx.fill();
+      ctx.lineWidth = 0.5;
+      ctx.strokeStyle = "rgb(255, 255, 255)";
+      ctx.stroke();
+
+      // smallbubble/Bubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(6.1, -3.1);
+      ctx.bezierCurveTo(6.1, -2.1, 5.1, -1.3, 3.8, -1.3);
+      ctx.bezierCurveTo(2.6, -1.3, 1.6, -2.1, 1.6, -3.1);
+      ctx.bezierCurveTo(1.6, -4.1, 2.6, -4.9, 3.8, -4.9);
+      ctx.bezierCurveTo(5.1, -4.9, 6.1, -4.1, 6.1, -3.1);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 255)";
+      ctx.fill();
+
+      // smallbubble/Bubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(3.3, 2.2);
+      ctx.bezierCurveTo(3.3, 2.7, 2.9, 3.1, 2.5, 3.1);
+      ctx.bezierCurveTo(2.0, 3.1, 1.6, 2.7, 1.6, 2.2);
+      ctx.bezierCurveTo(1.6, 1.7, 2.0, 1.3, 2.5, 1.3);
+      ctx.bezierCurveTo(2.9, 1.3, 3.3, 1.7, 3.3, 2.2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function tinybubble(ctx) {
+
+      var alpha = ctx.globalAlpha;
+
+      // tinybubble/Bubble
+      ctx.save();
+
+      // tinybubble/Bubble/Ellipse
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.25;
+      ctx.beginPath();
+      ctx.moveTo(4.4, 0.0);
+      ctx.bezierCurveTo(4.4, 2.4, 2.4, 4.4, 0.0, 4.4);
+      ctx.bezierCurveTo(-2.4, 4.4, -4.4, 2.4, -4.4, 0.0);
+      ctx.bezierCurveTo(-4.4, -2.4, -2.4, -4.4, 0.0, -4.4);
+      ctx.bezierCurveTo(2.4, -4.4, 4.4, -2.4, 4.4, 0.0);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(0, 230, 255)";
+      ctx.fill();
+      ctx.lineWidth = 0.2;
+      ctx.strokeStyle = "rgb(255, 255, 255)";
+      ctx.stroke();
+
+      // tinybubble/Bubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(3.1, -1.5);
+      ctx.bezierCurveTo(3.1, -1.0, 2.6, -0.6, 1.9, -0.6);
+      ctx.bezierCurveTo(1.3, -0.6, 0.8, -1.0, 0.8, -1.5);
+      ctx.bezierCurveTo(0.8, -2.1, 1.3, -2.5, 1.9, -2.5);
+      ctx.bezierCurveTo(2.6, -2.5, 3.1, -2.1, 3.1, -1.5);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(255, 255, 255)";
+      ctx.fill();
+
+      // tinybubble/Bubble/Ellipse
+      ctx.beginPath();
+      ctx.moveTo(1.7, 1.1);
+      ctx.bezierCurveTo(1.7, 1.4, 1.5, 1.5, 1.2, 1.5);
+      ctx.bezierCurveTo(1.0, 1.5, 0.8, 1.4, 0.8, 1.1);
+      ctx.bezierCurveTo(0.8, 0.9, 1.0, 0.7, 1.2, 0.7);
+      ctx.bezierCurveTo(1.5, 0.7, 1.7, 0.9, 1.7, 1.1);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      ctx.restore();
+    }
+  </script>
+ <link href="styles.css" rel="stylesheet" type="text/css">
+ </head>
+ <body onload="init()">
+   <canvas id="canvas" width="101" height="316"></canvas>
+	<footer>
+		<p id="footer_text">©2024, Jose C Marrero. This is a fictitious web page created solely for the purpose of education and training. All products and people associated with this web page are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+	</footer> 
+ </body>
+</html>
