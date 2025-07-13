@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Home | La Sevillana</title>
+<style type="text/css">
+#body {
+	background: linear-gradient(0deg, rgba(114, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?);
+	min-height: 100%;
+	background-attachment: fixed;
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+.header {
+	text-align: center;
+	color: white;
+	font-size: 40px;
+}
+.box {
+	text-align: center;
+	box-shadow: 10px, 10px, 10px, black;
+	padding: 10px;
+	height: 100px;
+}
+.link {
+	text-decoration: none;
+}
+.button {
+	padding: 10px;
+	color: white;
+	background-color: #720000;
+	border-radius: 5px;
+}
+.button:hover {
+	color: #720000;
+	background-color: white;
+}
+.content {
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+.text-box {
+	text-align: center;
+	color: black;
+	background-color: #FFE6BF;
+	border-radius: 5px;
+	width: 80%;
+	max-width: 300px;
+	margin-top: 50px;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding: 1em;
+	border: solid black;
+	box-shadow: 5px 5px 5px black;
+	display: flex;
+	flex-direction: column;
+	float: left;
+}
+.informative {
+	text-align: left;
+}
+#list {
+	list-style: none;
+	margin-right: auto;
+	text-align: left;
+}
+#specials {
+	color: white;
+	margin-top: 50px;
+}
+#footer {
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100px;
+	width: 100%;
+	margin-top: 50px;
+	background-color: black;
+	border: solid white;
+}
+#footer-text {
+	text-align: center;
+	color: white;
+	padding: 10px;
+}
+.wrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.wrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+}
+</style>
+</head>
+<body id="body">
+<header class="header">La Sevillana</header>
+<nav class="box"> <a class="link" href="index.html" target="_self">
+  <button class="button">Home</button>
+  </a> <a class="link" href="menu.html" target="_self">
+  <button class="button">Menu</button>
+  </a> <a class="link" href="catering.html" target="_self">
+  <button class="button">Catering</button>
+  </a> <a class="link" href="info.html" target="_self">
+  <button class="button">Info</button>
+  </a> <a class="link" href="contact.html" target="_self">
+  <button class="button">Contact</button>
+  </a> </nav>
+<div class="content">
+  <div  class="text-box">
+    <p class="informative">Enjoy our unique Spanish cuisine loved by many.</p>
+    <p class="informative">We bring a flavor that separates us from the rest 
+      and keeps you coming back.</p>
+    <p class="informative">Our Spanish cuisine is loved world wide so don't wait to get a taste of what is sure to be your best restuarant experience yet.</p>
+  </div>
+  <div class="text-box">
+    <h2>Hours</h2>
+    <ul id="list">
+      <li>Sunday Closed</li>
+      <li>Monday 12:00PM – 9:00PM</li>
+      <li>Tuesday 12:00PM – 9:00PM</li>
+      <li>Wednesday 12:00PM – 9:00PM</li>
+      <li>Thursday 12:00PM – 9:00PM</li>
+      <li>Friday 12:00PM – 9:00PM</li>
+      <li>Saturday 12:00PM – 7:00PM</li>
+    </ul>
+  </div>
+</div>
+<h1 id="specials" class="content">Specials</h1>
+<div class="wrapper"> <a href="specials.html">
+  <iframe width="100%" height="100%" frameborder="0" name="gallery" src="specials.html"></iframe>
+  </a></div>
+<footer id="footer">
+  <p id="footer-text">© Copyright 2024 Jose C. Marrero. All rights reserved.</p>
+</footer>
+</body>
+</html>
